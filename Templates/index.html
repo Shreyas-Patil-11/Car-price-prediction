@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Price Prediction</title>
+  </head>
+
+  <body>
+    <div class="regform"><h1>Car Price Prediction</h1></div>
+    <div class="main">
+      <form action="{{ url_for('predict')}}" method="post">
+        <div id="name">
+          <h3 id="ques">What is the Present Market Price of Car ?</h3>
+          <input
+            class="input-field"
+            name="Present_Price"
+            placeholder="Car Price in lakhs"
+            required="required"
+          />
+
+          <h3 id="ques">How many Kilometers Drived?</h3>
+          <input
+            class="input-field"
+            name="Kms_Driven"
+            placeholder="Kms driven by Car"
+            required="required"
+          />
+
+          <h3 id="ques">
+            How much owners previously had the car (0 or 1 or 3) ?
+          </h3>
+          <input
+            class="input-field"
+            name="Owner"
+            placeholder="Number of Owners"
+            required="required"
+          /><br />
+
+          <h3 id="ques">How old is the Car ?</h3>
+          <input
+            class="input-field"
+            id="first"
+            name="Year"
+            placeholder="Number of Years"
+            type="number"
+          />
+
+          <h3 id="ques">What is the Fuel Type ?</h3>
+          <select name="Fuel_Type_Petrol" id="resea" required="required">
+            <option disabled="disabled" selected="selected">
+              --Choose Option--
+            </option>
+            <option value="Petrol">Petrol</option>
+            <option value="Diesel">Diesel</option>
+            <option value="CNG">CNG</option>
+          </select>
+
+          <h3 id="ques">Are you A Dealer or Individual ?</h3>
+          <select name="Seller_Type_Individual" id="resea" required="required">
+            <option disabled="disabled" selected="selected">
+              --Choose Option--
+            </option>
+            <option value="Dealer">Dealer</option>
+            <option value="Individual">Individual</option>
+          </select>
+
+          <h3 id="ques">What is the Transmission Type ?</h3>
+          <select name="Transmission_Mannual" id="resea" required="required">
+            <option disabled="disabled" selected="selected">
+              --Choose Option--
+            </option>
+            <option value="Mannual">Mannual</option>
+            <option value="Automatic">Automatic</option></select
+          ><br />
+
+          <button id="sub" class="mt" type="submit">Predict</button>
+          <br />
+
+          <h3 id="score">{{ prediction_text }}</h3>
+        </div>
+      </form>
+    </div>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to right, #e0f7fa, #ffffff);
+        color: #333;
+      }
+
+      .regform {
+        width: 90%;
+        max-width: 800px;
+        background: #ffffff;
+        margin: 40px auto 0;
+        padding: 25px;
+        border-radius: 20px 20px 0 0;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .main {
+        width: 90%;
+        max-width: 800px;
+        background: #f9fafb;
+        margin: auto;
+        padding: 40px 30px;
+        border-radius: 0 0 20px 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+      }
+      
+      h1,
+      h3 {
+        color: #222;
+        margin-bottom: 15px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .input-field,
+      select {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-size: 16px;
+        background: #fff;
+        color: #333;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .input-field:focus,
+      select:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+        outline: none;
+      }
+
+      select option {
+        color: #333;
+      }
+
+      #sub {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(to right, #4facfe, #00f2fe);
+        border: none;
+        border-radius: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 15px;
+        color: white;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s;
+      }
+
+      #sub:hover {
+        background: linear-gradient(to right, #00f2fe, #4facfe);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+      }
+
+      #score {
+        background-color: #e6f7ff;
+        color: #007bff;
+        font-weight: bold;
+        text-align: center;
+        margin: 25px auto 0;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 22px;
+        width: 80%;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      @media (max-width: 600px) {
+        .regform,
+        .main {
+          width: 95%;
+          padding: 20px;
+        }
+
+        #sub {
+          font-size: 16px;
+          margin-top: 5px;
+        }
+      }
+    </style>
+  </body>
+</html>
